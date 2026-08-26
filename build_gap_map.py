@@ -280,7 +280,7 @@ def build_gap_table(vlat, vlng, miles, label):
 m = folium.Map(
     location=[37.7920, -122.4020],
     zoom_start=16,
-    tiles="CartoDB positron"
+    tiles="OpenStreetMap"
 )
 
 # Fonts + FA
