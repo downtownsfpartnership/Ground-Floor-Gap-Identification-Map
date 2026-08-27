@@ -275,24 +275,25 @@ m = folium.Map(
     tiles=None
 )
 
-# OpenFreeMap Positron basemap
-m.get_root().header.add_child(folium.Element("""
-<link href="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.css" rel="stylesheet" />
-<script src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>
-<script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet/leaflet-maplibre-gl.js"></script>
-"""))
+# Light gray basemap
+folium.TileLayer(
+    tiles="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}",
+    attr="Esri, HERE, Garmin, © OpenStreetMap contributors, and the GIS User Community",
+    name="Light Gray",
+    overlay=False,
+    control=False,
+    max_zoom=16
+).add_to(m)
 
-map_var = m.get_name()
-
-m.get_root().html.add_child(folium.Element(f"""
-<script>
-document.addEventListener("DOMContentLoaded", function() {{
-    L.maplibreGL({{
-        style: "https://tiles.openfreemap.org/styles/positron"
-    }}).addTo({map_var});
-}});
-</script>
-"""))
+# Optional labels/reference layer
+folium.TileLayer(
+    tiles="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}",
+    attr="Esri, HERE, Garmin, © OpenStreetMap contributors, and the GIS User Community",
+    name="Labels",
+    overlay=True,
+    control=False,
+    max_zoom=16
+).add_to(m)
 
 # Fonts + FA
 m.get_root().header.add_child(folium.Element("""
